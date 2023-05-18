@@ -1,9 +1,27 @@
 name: Deploy
 on: workflow_dispatch
 jobs:
+  image:
+    name: Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: devcontainers/ci@v0.2
+        with:
+          push: always
+          imageName: ghcr.io/rails-lambda/lamby-benchmark-devcontainer
+          cacheFrom: ghcr.io/rails-lambda/lamby-benchmark-devcontainer
+          runCmd: echo DONE!
   deploy:
-    # https://github.com/devcontainers/ci/issues/192
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    needs: image
     permissions:
       id-token: write
       contents: read
@@ -24,17 +42,10 @@ jobs:
           role-to-assume: arn:aws:iam::589405201853:role/oidc-role-github
           role-duration-seconds: 900
           role-session-name: lamby-benchmark
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy
         uses: devcontainers/ci@v0.2
         with:
-          push: always
-          imageName: ghcr.io/rails-lambda/lamby-benchmark-devcontainer
+          push: never
           cacheFrom: ghcr.io/rails-lambda/lamby-benchmark-devcontainer
           env: |
             CI
