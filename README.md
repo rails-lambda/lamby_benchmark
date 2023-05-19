@@ -12,3 +12,12 @@ fields @initDuration
         pct(@initDuration, 99) as p99
   by bin(5m)
 ```
+
+```
+bin(5m)	
+2023-05-19 01:35:00.000
+p5	2502.6066
+p50	2972.0349
+p95	3391.1901
+p99	3511.9219
+```
