@@ -1,0 +1,9 @@
+config:
+  target: "https://7e6rho7wgn3k6jimctp3idwtrm0gaqwg.lambda-url.us-east-1.on.aws"
+  phases:
+    - duration: 600
+      arrivalRate: 50
+scenarios:
+  - flow:
+    - get:
+        url: "/"
