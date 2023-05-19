@@ -10,6 +10,7 @@ gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "jbuilder"
+gem "nokogiri", force_ruby_platform: :ruby
 
 group :development, :test do
   gem "debug"
