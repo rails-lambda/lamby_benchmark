@@ -4,7 +4,7 @@ RUN yum update -y
 RUN yum install -y mariadb-devel
 
 # Install Crypteia for secure SSM-backed envs.
-COPY --from=ghcr.io/rails-lambda/crypteia-extension-amzn:1.1.0 /opt /opt
+COPY --from=ghcr.io/rails-lambda/crypteia-extension-amzn:1 /opt /opt
 ENV LD_PRELOAD=/opt/lib/libcrypteia.so
 
 # Copy prod application files and set handler.
