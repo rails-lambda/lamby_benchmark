@@ -1,5 +1,5 @@
 # Shared image, envs, packages for both devcontainer & prod.
-FROM public.ecr.aws/lambda/ruby:3.2
+FROM public.ecr.aws/lambda/ruby:2.7
 RUN yum update -y
 RUN yum install -y mariadb-devel
 
