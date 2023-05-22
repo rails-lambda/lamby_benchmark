@@ -39,7 +39,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: us-east-1
-          role-to-assume: arn:aws:iam::589405201853:role/oidc-role-github
+          role-to-assume: ${{ secrets.OIDC_ROLE_ARN }}
           role-duration-seconds: 900
           role-session-name: lamby-benchmark
       - name: Deploy
